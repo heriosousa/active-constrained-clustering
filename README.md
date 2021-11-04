@@ -1,6 +1,6 @@
-# active-semi-supervised-clustering
+# active-constrained-clustering
 
-Active semi-supervised clustering algorithms for scikit-learn.
+Active constrained clustering algorithms for scikit-learn.
 
 ## Algorithms
 
@@ -30,7 +30,7 @@ Active semi-supervised clustering algorithms for scikit-learn.
 ## Installation
 
 ```
-pip install active-semi-supervised-clustering
+pip install active-constrained-clustering
 ```
 
 ## Usage
