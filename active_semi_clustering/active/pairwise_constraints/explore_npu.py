@@ -47,3 +47,7 @@ class ExploreNPU(ExploreConsolidate, NPU):
                 break
 
         return neighborhoods
+
+def dist(i, S, points):
+    distances = np.array([np.sqrt(((points[i] - points[j]) ** 2).sum()) for j in S])
+    return distances.min()
