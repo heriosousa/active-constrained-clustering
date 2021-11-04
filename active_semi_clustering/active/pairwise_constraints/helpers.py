@@ -4,7 +4,7 @@ def get_constraints_from_neighborhoods(neighborhoods):
     for neighborhood in neighborhoods:
         for i in neighborhood:
             for j in neighborhood:
-                if i != j:
+                if i != j and (j, i) not in ml:
                     ml.append((i, j))
 
     cl = []
@@ -13,6 +13,7 @@ def get_constraints_from_neighborhoods(neighborhoods):
             if neighborhood != other_neighborhood:
                 for i in neighborhood:
                     for j in other_neighborhood:
-                        cl.append((i, j))
+                        if (j, i) not in cl:
+                            cl.append((i, j))
 
     return ml, cl

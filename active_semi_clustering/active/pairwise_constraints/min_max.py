@@ -3,7 +3,6 @@ import numpy as np
 from .example_oracle import MaximumQueriesExceeded
 from .explore_consolidate import ExploreConsolidate
 
-
 class MinMax(ExploreConsolidate):
     def _consolidate(self, neighborhoods, X, oracle):
         n = X.shape[0]

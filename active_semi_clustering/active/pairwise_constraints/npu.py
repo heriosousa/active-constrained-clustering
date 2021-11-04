@@ -4,7 +4,6 @@ from sklearn.ensemble import RandomForestClassifier
 from .example_oracle import MaximumQueriesExceeded
 from active_semi_clustering.exceptions import EmptyClustersException
 
-
 class NPU:
     def __init__(self, clusterer=None, **kwargs):
         self.clusterer = clusterer
@@ -27,42 +26,26 @@ class NPU:
                     break
 
                 x_i, p_i = self._most_informative(X, self.clusterer, neighborhoods)
-
                 sorted_neighborhoods = list(zip(*reversed(sorted(zip(p_i, neighborhoods)))))[1]
-                # print(x_i, neighborhoods, p_i, sorted_neighborhoods)
-
                 must_link_found = False
 
                 for neighborhood in sorted_neighborhoods:
-
                     must_linked = oracle.query(x_i, neighborhood[0])
                     if must_linked:
-                        # TODO is it necessary? this preprocessing is part of the clustering algorithms
-                        for x_j in neighborhood:
-                            ml.append([x_i, x_j])
-
-                        for other_neighborhood in neighborhoods:
-                            if neighborhood != other_neighborhood:
-                                for x_j in other_neighborhood:
-                                    cl.append([x_i, x_j])
-
                         neighborhood.append(x_i)
                         must_link_found = True
                         break
 
-                        # TODO should we add the cannot-link in case the algorithm stops before it queries all neighborhoods?
-
                 if not must_link_found:
-                    for neighborhood in neighborhoods:
-                        for x_j in neighborhood:
-                            cl.append([x_i, x_j])
-
                     neighborhoods.append([x_i])
+                    
+                ml, cl = get_constraints_from_neighborhoods(neighborhoods)
 
             except MaximumQueriesExceeded:
                 break
 
         self.pairwise_constraints_ = ml, cl
+        self.neighborhoods_ = neighborhoods
 
         return self
 
@@ -77,7 +60,7 @@ class NPU:
 
         unqueried_indices = set(range(n)) - neighborhoods_union
 
-        # TODO if there is only one neighborhood then choose the point randomly?
+        # If there is only one neighborhood then choose the point randomly
         if l <= 1:
             return np.random.choice(list(unqueried_indices)), [1]
 
@@ -99,7 +82,6 @@ class NPU:
         expected_costs = np.ones(n)
 
         # For each point that is not in any neighborhood...
-        # TODO iterate only unqueried indices
         for x_i in range(n):
             if not x_i in neighborhoods_union:
                 for n_i in range(l):

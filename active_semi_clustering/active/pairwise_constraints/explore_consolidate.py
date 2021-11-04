@@ -3,20 +3,20 @@ import numpy as np
 from .helpers import get_constraints_from_neighborhoods
 from .example_oracle import MaximumQueriesExceeded
 
-
 class ExploreConsolidate:
-    def __init__(self, n_clusters=3, **kwargs):
+    def __init__(self, n_clusters, **kwargs):
         self.n_clusters = n_clusters
 
     def fit(self, X, oracle=None):
         if oracle.max_queries_cnt <= 0:
             return [], []
 
-        neighborhoods = self._explore(X, self.n_clusters, oracle)
-        neighborhoods = self._consolidate(neighborhoods, X, oracle)
-
+        neighborhoods = self._explore(X, self.n_clusters, oracle)        
+        self.explore_pairwise_constraints_ = get_constraints_from_neighborhoods(neighborhoods)
+        
+        self.neighborhoods_ = self._consolidate(neighborhoods, X, oracle)
         self.pairwise_constraints_ = get_constraints_from_neighborhoods(neighborhoods)
-
+        
         return self
 
     def _explore(self, X, k, oracle):
@@ -57,7 +57,7 @@ class ExploreConsolidate:
             pass
 
         return neighborhoods
-
+    
     def _consolidate(self, neighborhoods, X, oracle):
         n = X.shape[0]
 
@@ -78,20 +78,27 @@ class ExploreConsolidate:
 
                 sorted_neighborhoods = sorted(neighborhoods, key=lambda neighborhood: dist(i, neighborhood, X))
 
+                new_neighborhood = True
                 for neighborhood in sorted_neighborhoods:
                     if oracle.query(i, neighborhood[0]):
                         neighborhood.append(i)
+                        new_neighborhood = False
                         break
+                
+                if new_neighborhood:
+                    neighborhoods.append([i])
 
                 neighborhoods_union.add(i)
                 remaining.remove(i)
+                
+                if len(remaining) == 0:
+                    break
 
             except MaximumQueriesExceeded:
                 break
 
         return neighborhoods
-
-
+    
 def dist(i, S, points):
     distances = np.array([np.sqrt(((points[i] - points[j]) ** 2).sum()) for j in S])
     return distances.min()
