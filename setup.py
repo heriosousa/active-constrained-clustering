@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="active-semi-supervised-clustering",
-    version="0.0.1",
-    author="Jakub Svehla",
-    author_email="jakub.svehla@datamole.cz",
-    description="Active semi-supervised clustering algorithms for scikit-learn",
+    name="active-constrained-clustering",
+    version="0.0.2",
+    author="Herio Sousa",
+    author_email="heriosousa@hotmail.com",
+    description="Active constrained clustering algorithms",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/datamole-ai/active-semi-supervised-clustering",
+    url="https://github.com/heriosousa/active-constrained-clustering",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python",
