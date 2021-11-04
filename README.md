@@ -8,16 +8,24 @@ Active semi-supervised clustering algorithms for scikit-learn.
 
 * Seeded-KMeans
 * Constrainted-KMeans
-* COP-KMeans
+
+### Constrained clustering
 * Pairwise constrained K-Means (PCK-Means)
 * Metric K-Means (MK-Means)
+* COP-KMeans
 * Metric pairwise constrained K-Means (MPCK-Means)
+* Constrained spectral clustering (CSP)
+* Agglomerative hierarchical clustering with constraints (AHCC)
 
 ### Active learning of pairwise clustering
 
-* Explore & Consolidate
-* Min-max
+* Explore-Consolidate
+* Min-Max
 * Normalized point-based uncertainty (NPU) method
+* Borderline MST heuristic
+* Distant MST heuristic
+* Unified borderline and distant MST heuristics
+* Explore-NPU
 
 ## Installation
 
