@@ -10,10 +10,12 @@ Active constrained clustering algorithms for scikit-learn.
 * Constrainted-KMeans
 
 ### Constrained clustering
-* Pairwise constrained K-Means (PCK-Means)
 * Metric K-Means (MK-Means)
-* COP-KMeans
+* Pairwise constrained K-Means (PCK-Means)
+* Constrained K-Means (COPK-Means)
 * Metric pairwise constrained K-Means (MPCK-Means)
+
+New additions:
 * Constrained spectral clustering (CSP)
 * Agglomerative hierarchical clustering with constraints (AHCC)
 
@@ -21,7 +23,9 @@ Active constrained clustering algorithms for scikit-learn.
 
 * Explore-Consolidate
 * Min-Max
-* Normalized point-based uncertainty (NPU) method
+* Normalized point-based uncertainty (NPU)
+
+New additions:
 * Borderline MST heuristic
 * Distant MST heuristic
 * Unified borderline and distant MST heuristics
