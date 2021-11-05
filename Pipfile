@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-active-semi-supervised-clustering = {editable = true, path = "."}
+active-constrained-clustering = {editable = true, path = "."}
 
 [dev-packages]
 jupyter = "*"

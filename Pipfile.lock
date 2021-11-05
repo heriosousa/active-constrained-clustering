@@ -16,7 +16,7 @@
         ]
     },
     "default": {
-        "active-semi-supervised-clustering": {
+        "active-constrained-clustering": {
             "editable": true,
             "path": "."
         },
