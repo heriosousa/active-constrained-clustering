@@ -6,8 +6,8 @@ Active constrained clustering algorithms for scikit-learn.
 
 ### Semi-supervised clustering
 
-* Seeded-KMeans
-* Constrainted-KMeans
+* Seeded K-Means
+* Constrained K-Means
 
 ### Constrained clustering
 * Metric K-Means (MK-Means)
